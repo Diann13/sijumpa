@@ -1,0 +1,10 @@
+Request Petugas ID: 3
+Query: 
+    SELECT t.*, w.nama as nama_warga 
+    FROM transaksi_jumpitan t 
+    JOIN warga w ON t.warga_id = w.id 
+    WHERE t.petugas_id = '3'
+    ORDER BY t.tanggal DESC
+
+Result Count: 1
+---
