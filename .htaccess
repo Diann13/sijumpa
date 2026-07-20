@@ -1,0 +1,28 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    
+    # Redirect http to https (optional, uncomment jika sudah punya SSL certificate)
+    # RewriteCond %{HTTPS} off
+    # RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+    
+    # Set index.php sebagai default index
+    DirectoryIndex index.php
+    
+    # Remove .php extension dari URL (optional)
+    # RewriteCond %{REQUEST_FILENAME} !-f
+    # RewriteCond %{REQUEST_FILENAME} !-d
+    # RewriteRule ^([^\.]+)$ $1.php [NC,L]
+</IfModule>
+
+# Cegah akses langsung ke file-file sensitif
+<FilesMatch "\.(env|json|config|sql|log)$">
+    Order Deny,Allow
+    Deny from all
+</FilesMatch>
+
+# Izinkan akses untuk assets
+<IfModule mod_rewrite.c>
+    RewriteCond %{REQUEST_URI} ^/(assets|api)/ [OR]
+    RewriteCond %{REQUEST_URI} ^/(index|login|register|dashboard|logout)\.php$
+    RewriteRule ^ - [L]
+</IfModule>

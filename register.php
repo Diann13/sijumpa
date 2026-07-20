@@ -15,7 +15,7 @@ if (isset($_POST['register'])) {
     $username = mysqli_real_escape_string($conn, $_POST['username']);
     $password = $_POST['password'];
     $konfirmasi = $_POST['konfirmasi'];
-    
+
     // Validasi input
     if (empty($nama) || empty($username) || empty($password) || empty($konfirmasi)) {
         $msg = "Semua kolom wajib diisi!";
@@ -32,10 +32,10 @@ if (isset($_POST['register'])) {
         } else {
             // Hash password
             $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-            
+
             // Insert ke database dengan role otomatis 'petugas'
             $query = "INSERT INTO users (nama, username, password, role) VALUES ('$nama', '$username', '$hashed_password', 'petugas')";
-            
+
             if (mysqli_query($conn, $query)) {
                 $msg = "Silahkan login melalui aplikasi mobile SiJumpa";
                 $msgType = 'success';
@@ -49,6 +49,7 @@ if (isset($_POST['register'])) {
 ?>
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -58,6 +59,7 @@ if (isset($_POST['register'])) {
     <link rel="stylesheet" href="assets/syle.css">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
+
 <body class="min-h-screen flex items-center justify-center relative overflow-hidden text-slate-200 selection:bg-purple-500/30">
 
     <!-- Ornamen Background Animasi -->
@@ -66,9 +68,9 @@ if (isset($_POST['register'])) {
     <div class="absolute w-72 h-72 bg-indigo-500 rounded-full blur-[90px] opacity-20 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 mix-blend-screen"></div>
 
     <div class="w-full max-w-md p-6 relative z-10 animate-fade-up">
-        
+
         <div class="glass-panel rounded-3xl p-8 sm:p-10 shadow-2xl">
-            
+
             <!-- Header -->
             <div class="text-center mb-8 animate-fade-up delay-100 opacity-0" style="animation-fill-mode: forwards;">
                 <div class="flex justify-center mb-6">
@@ -79,8 +81,8 @@ if (isset($_POST['register'])) {
             </div>
 
             <!-- Pesan Notifikasi -->
-            <?php if($msg !== '') : ?>
-                <?php if($msgType === 'error') : ?>
+            <?php if ($msg !== '') : ?>
+                <?php if ($msgType === 'error') : ?>
                     <div class="bg-red-500/10 border border-red-500/30 text-red-400 px-4 py-3 rounded-xl mb-6 text-sm flex items-center gap-3 animate-fade-up" style="animation-fill-mode: forwards;">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 shrink-0" viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
@@ -108,7 +110,7 @@ if (isset($_POST['register'])) {
 
             <!-- Form -->
             <form method="POST" class="space-y-4 animate-fade-up delay-200 opacity-0" style="animation-fill-mode: forwards;">
-                
+
                 <div class="space-y-2">
                     <label for="nama" class="text-sm font-medium text-slate-300 ml-1">Nama Lengkap</label>
                     <div class="relative">
@@ -150,7 +152,7 @@ if (isset($_POST['register'])) {
                         </button>
                     </div>
                 </div>
-                
+
                 <div class="space-y-2">
                     <label for="konfirmasi" class="text-sm font-medium text-slate-300 ml-1">Konfirmasi Password</label>
                     <div class="relative">
@@ -180,13 +182,22 @@ if (isset($_POST['register'])) {
             </form>
 
         </div>
-        
-        <p class="text-center text-sm mt-8 text-slate-500 animate-fade-up delay-300 opacity-0" style="animation-fill-mode: forwards;">
-            &copy; 2026 SiJumpa System. Hak cipta dilindungi.
-        </p>
+
+        <div class="flex flex-col items-center gap-3 mt-8 animate-fade-up delay-300 opacity-0" style="animation-fill-mode: forwards;">
+            <a href="index.php" class="text-slate-400 hover:text-blue-400 transition-colors text-sm flex items-center gap-2">
+                <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+                Kembali ke Halaman Utama
+            </a>
+            <p class="text-sm text-slate-500">
+                &copy; 2026 SiJumpa System. Hak cipta dilindungi.
+            </p>
+        </div>
 
     </div>
 
     <script src="assets/script.js"></script>
 </body>
+
 </html>

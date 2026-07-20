@@ -1,12 +1,11 @@
 <?php
 $host = "localhost";
-$user = "root";
-$pass = "";
-$db   = "db_sijumpa";
+$user = "trplbmyi_sijumpamu";
+$pass = "si_JUMPA123";
+$db   = "trplbmyi_Akademik_B24011";
 
 $conn = mysqli_connect($host, $user, $pass, $db);
 
-if(!$conn){
+if (!$conn) {
     die("Koneksi gagal: " . mysqli_connect_error());
 }
-?>
